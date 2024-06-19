@@ -15,4 +15,3 @@ This project is a payment website built using the MERN stack. It incorporates JW
 - **Database**: MongoDB
 - **Authentication**: JSON Web Tokens (JWT)
 
-## Project Structure
