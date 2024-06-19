@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const corsOption = require("./config/corsOptions");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const authMiddleware = require("./middlewares/authMiddleware");
 
 app.use(cors(corsOption));
 
@@ -21,7 +22,7 @@ app.use("/api/v1", rootRouter);
 
 app.use("/api/v1/user", userRouter);
 
-app.use("/api/v1/account", accountRouter);
+app.use("/api/v1/account", authMiddleware, accountRouter);
 
 connectDB();
 

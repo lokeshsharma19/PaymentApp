@@ -9,7 +9,6 @@ import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import Send from "./pages/Send";
-//comments
 
 function App() {
   const router = createBrowserRouter(

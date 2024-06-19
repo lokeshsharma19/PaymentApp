@@ -21,7 +21,6 @@ const transferAmount = async (req, res) => {
 
   const userId = req.body.userId;
   const { to, amount } = req.body;
-
   const senderAcc = await Account.findOne({ userId }).session(session);
 
   if (!userId) {
@@ -29,7 +28,6 @@ const transferAmount = async (req, res) => {
       message: "Unauthorized",
     });
   }
-
   if (!amount || senderAcc.balance < amount) {
     await session.abortTransaction();
     return res.status(400).json({
@@ -38,22 +36,20 @@ const transferAmount = async (req, res) => {
   }
 
   const receiverAcc = await Account.findOne({ userId: to }).session(session);
-
+  console.log("mila", receiverAcc);
   if (!receiverAcc) {
     await session.abortTransaction();
     return res.status(400).json({
-      message: "Insufficient balance",
+      message: "Receiver not found",
     });
   }
 
-  await Account.findByIdAndUpdate(
-    { userId },
-    { $inc: { balance: amount } }
-  ).session(session);
-  await Account.findByIdAndUpdate(
-    { userId: to },
-    { $inc: { balance: -amount } }
-  ).session(session);
+  await Account.findByIdAndUpdate(senderAcc._id, {
+    $inc: { balance: -amount },
+  }).session(session);
+  await Account.findByIdAndUpdate(receiverAcc._id, {
+    $inc: { balance: amount },
+  }).session(session);
 
   session.commitTransaction();
 

@@ -19,14 +19,11 @@ const getUser = async (req, res) => {
     ],
   });
 
-  console.log(userList);
-
   if (!userList || userList.length == 0) {
     return res.status(411).json({
       message: "Cannot find any user",
     });
   }
-  console.log(userList);
   res.json({
     usersList: userList,
   });

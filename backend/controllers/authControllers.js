@@ -80,6 +80,7 @@ const signup = async (req, res) => {
   });
 };
 
+// ###### signin #####//
 const signin = async (req, res) => {
   const success = signInBody.safeParse(req.body);
 
@@ -90,21 +91,21 @@ const signin = async (req, res) => {
   }
 
   const { username, password } = req.body;
+  const foundUserPwd = await User.findOne({ username }).select("password");
 
-  const foundUser = await User.findOne({ username });
-
-  if (!foundUser) {
+  if (!foundUserPwd) {
     return res.json({
       message: "User doesn't exists...",
     });
   }
+  console.log(foundUserPwd);
 
-  const match = await bcrypt.compare(password, foundUser.password);
+  const match = await bcrypt.compare(password, foundUserPwd.password);
   if (!match) return res.status(401).json({ message: "Unauthorized" });
 
   const token = jwt.sign(
     {
-      userId: foundUser._id,
+      userId: foundUserPwd._id,
     },
     process.env.JWT_TOKEN_SECRET
   );

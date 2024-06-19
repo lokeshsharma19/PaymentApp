@@ -3,7 +3,7 @@ import React from "react";
 const Heading = ({ label }) => {
   return (
     <div>
-      <p className="text-3xl font-bold">{label}</p>
+      <p className="font-bold text-4xl pt-6">{label}</p>
     </div>
   );
 };
