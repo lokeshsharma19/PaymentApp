@@ -71,6 +71,7 @@ const signup = async (req, res) => {
   const token = jwt.sign(
     {
       userId,
+      username,
     },
     process.env.JWT_TOKEN_SECRET
   );
@@ -91,14 +92,12 @@ const signin = async (req, res) => {
   }
 
   const { username, password } = req.body;
-  const foundUserPwd = await User.findOne({ username }).select("password");
-
+  const foundUserPwd = await User.findOne({ username }).select("+password");
   if (!foundUserPwd) {
     return res.json({
       message: "User doesn't exists...",
     });
   }
-  console.log(foundUserPwd);
 
   const match = await bcrypt.compare(password, foundUserPwd.password);
   if (!match) return res.status(401).json({ message: "Unauthorized" });
@@ -106,6 +105,8 @@ const signin = async (req, res) => {
   const token = jwt.sign(
     {
       userId: foundUserPwd._id,
+      firstName: foundUserPwd.firstName,
+      lastName: foundUserPwd.lastName,
     },
     process.env.JWT_TOKEN_SECRET
   );

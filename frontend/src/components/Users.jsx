@@ -35,7 +35,7 @@ const Users = () => {
     setFilter(value);
   };
 
-  const debouncedFunc = debounce(handleChange, 1000);
+  const debouncedFunc = debounce(handleChange, 500);
 
   return (
     <>
@@ -70,7 +70,7 @@ function User({ user }) {
     navigate(`/send?userId=${user._id}&user=${user.firstName}`);
   };
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between items-center p-2 border-gray-300 border-2 my-2 rounded-xl">
       <div className="flex">
         <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
           <div className="flex flex-col justify-center h-full text-xl">
