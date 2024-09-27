@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import BottomWarning from "../components/BottomWarning";
 import api from "../../api/index";
 import { useNavigate } from "react-router-dom";
+import { notifyError, notifySuccess } from "../utils/notify";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -23,15 +24,21 @@ const SignUp = () => {
       username: email,
       password,
     };
+    if (!firstName || !lastName || !email || !password) {
+      notifyError("Enter all the fields!");
+      return;
+    }
     const endpoint = "/api/v1/user/signup";
 
     try {
       const response = await api.post(endpoint, newUser);
       if (response.status >= 200 && response.status < 300) {
+        notifySuccess(response.data.message);
         setResMsg(response.data.message);
         navigate("/signin");
       }
     } catch (error) {
+      notifyError("Sign up failed!");
       console.log(error);
       setResMsg(error);
     }
@@ -61,8 +68,9 @@ const SignUp = () => {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-            placeholder="harkirat@gmail.com"
+            placeholder="xyz...@gmail.com"
             label={"Email"}
+            type={"email"}
           />
           <InputBox
             onChange={(e) => {
@@ -70,6 +78,7 @@ const SignUp = () => {
             }}
             placeholder="123456"
             label={"Password"}
+            type={"password"}
           />
           <div className="pt-4">
             <Button

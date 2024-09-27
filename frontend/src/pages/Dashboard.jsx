@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Appbar from "../components/Appbar";
 import Balance from "../components/Balance";
 import Users from "../components/Users";
+import { checkAuth } from "../utils/checkAuth";
+import { redirect } from "react-router-dom";
+
+export const DashboardLoader = () => {
+  if (checkAuth()) {
+    return null;
+  }
+  return redirect("/signin");
+};
 
 const Dashboard = () => {
   return (

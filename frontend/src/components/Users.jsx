@@ -39,7 +39,7 @@ const Users = () => {
 
   return (
     <>
-      <div className="font-bold mt-6 text-lg">Users</div>
+      <div className="font-bold mt-6 text-xl">Users</div>
       <div className="my-4">
         <input
           type="text"
@@ -47,17 +47,13 @@ const Users = () => {
           onChange={(e) => {
             debouncedFunc(e.target.value);
           }}
-          className="w-full px-2 py-1 border rounded border-slate-200 "
+          className="w-full  px-3 py-2 border rounded-xl border-slate-200"
           placeholder="Search Users"
         />
       </div>
       <div>
         {users.map((user) => {
-          return (
-            <>
-              <User key={user._id} user={user} />
-            </>
-          );
+          return <User key={user._id} user={user} />;
         })}
       </div>
     </>

@@ -6,6 +6,7 @@ import SubHeading from "../components/SubHeading";
 import api from "../../api/index";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { notifyError, notifySuccess } from "../utils/notify";
 
 const SignIn = () => {
   const [password, setPassword] = useState("");
@@ -13,6 +14,9 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   const signInReq = async () => {
+    if (!email || !password) {
+      notifyError("Enter all the fields!");
+    }
     const userObj = {
       username: email,
       password,
@@ -21,7 +25,7 @@ const SignIn = () => {
       const endpoint = "/api/v1/user/signin";
       const response = await api.post(endpoint, userObj);
       if (response.status >= 200 && response.status < 300) {
-        console.log(response);
+        notifySuccess("Logged-in successfully");
         const token = response?.data?.token;
         localStorage.setItem("token", JSON.stringify(token));
         navigate(`/dashboard`, { replace: true });
@@ -41,8 +45,9 @@ const SignIn = () => {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-            placeholder="harkirat@gmail.com"
+            placeholder="xyz...@gmail.com"
             label={"Email"}
+            type="email"
           />
           <InputBox
             onChange={(e) => {
@@ -50,6 +55,7 @@ const SignIn = () => {
             }}
             placeholder="123456"
             label={"Password"}
+            type={"password"}
           />
           <div className="pt-4">
             <Button

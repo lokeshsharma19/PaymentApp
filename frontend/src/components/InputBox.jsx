@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputBox = ({ label, placeholder, onChange }) => {
+const InputBox = ({ label, placeholder, onChange, type }) => {
   return (
     <div>
       <div className="text-left">
@@ -11,7 +11,7 @@ const InputBox = ({ label, placeholder, onChange }) => {
       <input
         onChange={onChange}
         className="w-full px-2 py-1 border rounded border-slate-200"
-        type="text"
+        type={type || "text"}
         placeholder={placeholder}
       />
     </div>
