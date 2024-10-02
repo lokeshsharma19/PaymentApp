@@ -1,0 +1,5 @@
+# Proxy requests to an API
+/apiredirect/* http://api.com/:splat 200
+
+# Handle SPA routes by serving index.html
+/* /index.html 200

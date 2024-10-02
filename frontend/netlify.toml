@@ -1,0 +1,7 @@
+# netlify.toml
+
+[[redirects]]
+  from = "/api/*"
+  to = "http://ec2-13-60-81-212.eu-north-1.compute.amazonaws.com/api/:splat"
+  status = 200
+  force = true

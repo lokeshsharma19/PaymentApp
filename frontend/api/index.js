@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   withCredentials: true,
-  baseURL: "http://localhost:3500",
+  baseURL: "http://ec2-13-60-81-212.eu-north-1.compute.amazonaws.com",
 });
 
 instance.interceptors.request.use((config) => {

@@ -36,7 +36,6 @@ const transferAmount = async (req, res) => {
   }
 
   const receiverAcc = await Account.findOne({ userId: to }).session(session);
-  console.log("mila", receiverAcc);
   if (!receiverAcc) {
     await session.abortTransaction();
     return res.status(400).json({
