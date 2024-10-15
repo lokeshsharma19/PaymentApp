@@ -1,5 +1,1 @@
-# Proxy requests to an API
-/apiredirect/* http://api.com/:splat 200
-
-# Handle SPA routes by serving index.html
-/* /index.html 200
+/api/*  http://ec2-13-60-81-212.eu-north-1.compute.amazonaws.com/api/:splat  200
