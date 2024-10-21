@@ -1,7 +1,7 @@
 # Payment Website - MERN Stack with JWT Authentication and MongoDB Transactions
 
 ## Live Demo
-You can play the **Dev Game** live at: [Live Demo Link](https://euphonious-naiad-c96981.netlify.app/signin)
+You can play the **Dev Game** live at: [Live Demo Link](https://euphonious-naiad-c96981.netlify.app)
 
 ## Overview
 This project is a payment website built using the MERN stack. It incorporates JWT for authentication and demonstrates database transaction concepts using MongoDB. The frontend is styled with Tailwind CSS.
